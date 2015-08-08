@@ -13,8 +13,7 @@ Clone inside $GOPATH/src
 go get github.com/tools/godep
 
 ## Install dependencies
-cd $GOPATH/src/thisrepo
-godep restore
+cd $GOPATH/src/<reponame> && godep restore
 
 ## Run server:
 go run server.go (runs on port 3000)

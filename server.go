@@ -20,9 +20,13 @@ func main() {
   m.Get("/", func() string {
     return "Hello world!"
   })
-  
+     
   m.Get("/error", func() (int, string) {
     return 400, "i'm a teapot" // HTTP 418 : "i'm a teapot"
+  })
+
+  m.Get("/error500", func() (int, string) {
+    return 500, "i'm a teapot" // HTTP 418 : "i'm a teapot"
   })
 
   m.Get("/user", func(r render.Render) {
