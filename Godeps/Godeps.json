@@ -1,0 +1,42 @@
+{
+	"ImportPath": "apiPoc",
+	"GoVersion": "go1.4.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/inject",
+			"Comment": "v1.0-rc1-10-g33e0aa1",
+			"Rev": "33e0aa1cb7c019ccc3fbe049a8262a6403d30504"
+		},
+		{
+			"ImportPath": "github.com/go-martini/martini",
+			"Comment": "v1.0-132-g5ac3ef8",
+			"Rev": "5ac3ef84326c4587ef4fc119444fb75671032e2f"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm",
+			"Rev": "fd9e42655f382e76a4c755a676be827947f23b81"
+		},
+		{
+			"ImportPath": "github.com/lib/pq/hstore",
+			"Comment": "go1.0-cutoff-59-gb269bd0",
+			"Rev": "b269bd035a727d6c1081f76e7a239a1b00674c40"
+		},
+		{
+			"ImportPath": "github.com/martini-contrib/render",
+			"Rev": "ec18f8345a1181146728238980606fb1d6f40e8c"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-sqlite3",
+			"Comment": "v1.0.0-2-g0fa27b5",
+			"Rev": "0fa27b5cb05c4239ff23cbec3af1d56af75c1854"
+		},
+		{
+			"ImportPath": "github.com/oxtoacart/bpool",
+			"Rev": "4e1c5567d7c2dd59fa4c7c83d34c2f3528b025d6"
+		},
+		{
+			"ImportPath": "github.com/qor/inflection",
+			"Rev": "45321e63b98c756df17369c027c1df89298e1288"
+		}
+	]
+}
