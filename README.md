@@ -15,5 +15,8 @@ go get github.com/tools/godep
 ## Install dependencies
 cd $GOPATH/src/<reponame> && godep restore
 
+## Install gin for live code reloading
+go get github.com/codegangsta/gin
+
 ## Run server:
-go run server.go (runs on port 3000)
+gin run (runs on port 3000)
