@@ -8,9 +8,7 @@ import (
   "github.com/jinzhu/gorm"
   _ "github.com/mattn/go-sqlite3"
   "time"
-  "encoding/json"
 )
-import "fmt"
 
 func main() {
   m := martini.Classic()
@@ -29,13 +27,15 @@ func main() {
     return 500, "i'm a teapot" // HTTP 418 : "i'm a teapot"
   })
 
+  m.Get("/api/user", func(r render.Render) {
+    user := ormTest()
+    r.JSON(201, user)
+    
+  })
+
   m.Get("/user", func(r render.Render) {
     user := ormTest()
-    userJson, err := json.Marshal(user)
-    fmt.Printf("%s\n", userJson)
-    if err == nil {
-      r.JSON(201, user)
-    }
+    r.HTML(200, "user", user.Name)
   })
 
   m.Run()
