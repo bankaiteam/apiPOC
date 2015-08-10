@@ -13,7 +13,7 @@ Clone inside $GOPATH/src
 go get github.com/tools/godep
 
 ## Install dependencies
-cd $GOPATH/src/<reponame> && godep restore
+cd $GOPATH/src/(reponame) && godep restore
 
 ## Install gin for live code reloading
 go get github.com/codegangsta/gin
