@@ -8,8 +8,8 @@ import (
 type User struct {
     ID           int
     Birthday     time.Time
-    Age          int
-    Name         string  `sql:"size:255"` // Default size for string is 255, you could reset it with this tag
+    Age          int `form:"age"` 
+    Name         string  `sql:"size:255" form:"name"`// Default size for string is 255, you could reset it with this tag
     Num          int     `sql:"AUTO_INCREMENT"`
     CreatedAt    time.Time
     UpdatedAt    time.Time

@@ -5,13 +5,20 @@ import (
   "apiPoc/model"
   "github.com/go-martini/martini"
   "github.com/martini-contrib/render"
+  "github.com/codegangsta/martini-contrib/binding"
   "github.com/jinzhu/gorm"
   _ "github.com/mattn/go-sqlite3"
   "time"
+  "fmt"
 )
 
 func main() {
   m := martini.Classic()
+  db, err := gorm.Open("sqlite3", "./gorm.db")
+  if err != nil{
+    panic("Could not open db")
+  }
+  migrateDb(db)
   
   m.Use(render.Renderer()) //HTML & JSON renderer middleware
 
@@ -28,27 +35,40 @@ func main() {
   })
 
   m.Get("/api/user", func(r render.Render) {
-    user := ormTest()
-    r.JSON(201, user)
-    
+    user := ormTest(db)
+    r.JSON(201, user)   
   })
 
   m.Get("/user", func(r render.Render) {
-    user := ormTest()
-    r.HTML(200, "user", user.Name)
+    users := ormTest(db)
+    r.HTML(200, "user", users)
+  })
+
+  m.Get("/users", func(r render.Render) {
+    users := GetAllUsers(db)
+    r.HTML(200, "createUser", users)
+  })
+
+  m.Post("/users", binding.Form(model.User{}), func(user model.User, r render.Render) {
+    db.Create(&user)
+    fmt.Printf("%v\n", user)
+    users := GetAllUsers(db)
+    r.HTML(200, "createUser", users)
   })
 
   m.Run()
 }
 
+func GetAllUsers(db gorm.DB)[]model.User{
+  users := []model.User{}
+  db.Find(&users)
+  return users
+}
 
 func migrateDb(db gorm.DB){
   // Create table
   db.CreateTable(&model.User{})
   db.Set("gorm:table_options", "ENGINE=InnoDB").CreateTable(&model.User{})
-
-  // Drop table
-  db.DropTable(&model.User{})
 
   // Automating Migration
   db.AutoMigrate(&model.User{})
@@ -58,18 +78,13 @@ func migrateDb(db gorm.DB){
   // WON'T update current column's type or delete unused columns, to protect your data.
   // If the table is not existing, AutoMigrate will create the table automatically.
 }
-
-func ormTest() model.User{
-    db, err := gorm.Open("sqlite3", "./gorm.db")
-    migrateDb(db)
-    if err == nil {
+   
+func ormTest(db gorm.DB) []model.User{
       user := model.User{Name: "Jinzhu", Age: 18, Birthday: time.Now()}
       db.NewRecord(user) // => returns `true` if primary key is blank
       db.Create(&user)
       db.NewRecord(user) // => return `false` after `user` created
-      user2 := model.User{}
-      db.First(&user2)
-      return user2
-    }
-    panic("Not implemented")
+      users := []model.User{}
+      db.First(&users)
+      return users
 }
