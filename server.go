@@ -2,7 +2,7 @@ package main
 
 
 import (
-  "apiPoc/model"
+  "apiPOC/model"
   "github.com/go-martini/martini"
   "github.com/martini-contrib/render"
   "github.com/codegangsta/martini-contrib/binding"
